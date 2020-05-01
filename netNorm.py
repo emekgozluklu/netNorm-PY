@@ -187,18 +187,26 @@ def netNorm(v, nbr_of_sub, nbr_of_regions):
     fused_network = np.array(fused_network)
     return fused_network
 
-nbr_of_sub = int(input('Please select the number of subjects: '))
-nbr_of_regions = int(input('Please select the number of regions: '))
-nbr_of_views= int(input('Please select the number of views: '))
 
-v = np.random.rand(nbr_of_views, nbr_of_sub,nbr_of_regions, nbr_of_regions)
-A = netNorm(v, nbr_of_sub, nbr_of_regions)
-print(A)
+# work if file not imported
+if __name__ == "__main__":
 
-mx = A.max()
-mn = A.min()
-print(mx)
-print(mn)
-plt.pcolor(A, vmin=mn, vmax=mx)
-plt.imshow(A)
-plt.show()
+    # take user inputs
+    nbr_of_sub = int(input('Please select the number of subjects: '))
+    nbr_of_regions = int(input('Please select the number of regions: '))
+    nbr_of_views = int(input('Please select the number of views: '))
+
+    # get random views and calculate example CBT
+    v = np.random.rand(nbr_of_views, nbr_of_sub,nbr_of_regions, nbr_of_regions)
+    A = netNorm(v, nbr_of_sub, nbr_of_regions)
+
+    # print min and max values
+    mx = A.max()
+    mn = A.min()
+    print(mx)
+    print(mn)
+
+    # plot the final CBT matrix
+    plt.pcolor(A, vmin=mn, vmax=mx)
+    plt.imshow(A)
+    plt.show()
